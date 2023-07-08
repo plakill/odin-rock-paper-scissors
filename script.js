@@ -93,7 +93,9 @@ const keepScore = (result) => {
 const buttons = document.querySelectorAll("button");
 buttons.forEach(function (button) {
     button.addEventListener("click", () => {
-        keepScore( playRound(button.textContent, getComputerChoice()) );
+        keepScore( playRound(button.className, getComputerChoice()) );
         setTimeout(() => keepScore(2), 100);
+        button.id = "clicked";
+        setTimeout(() => button.id = "", 100);
     });
 });

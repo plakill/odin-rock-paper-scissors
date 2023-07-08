@@ -34,13 +34,32 @@ body {
 
 .buttons {
     display: flex;
-    gap: 10px;
+    gap: 40px;
+    padding: 20px;
 }
 
 button {
     padding: 5px;
     background: #bd93f9;
     color: black;
+}
+
+.buttons > * {
+    font-size: 64px;
+    padding: 0;
+    max-height: fit-content;
+    flex: 0 1 auto;
+    padding: 0 20px;
+    background: #282a36;
+    border: 0;
+}
+
+.buttons > *:hover {
+    border: 1px solid white;
+}
+
+#clicked {
+    border: 1px solid grey;
 }
 
 .score {
