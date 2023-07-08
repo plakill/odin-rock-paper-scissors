@@ -69,10 +69,12 @@ const keepScore = (result) => {
     
     let winner = document.querySelector("div.winner");
     if (wins == 5) {
-        winner.textContent = "You won the game!";
+        resultDiv.textContent = "You won the game!";
+        winner.textContent = "";
         winner.appendChild(playAgain);
     } else if (loses == 5) {
-        winner.textContent = "You lost the game!";
+        resultDiv.textContent = "You lost the game!";
+        winner.textContent = "";
         winner.appendChild(playAgain);
     } else {
         switch (result) {
