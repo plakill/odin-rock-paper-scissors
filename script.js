@@ -94,6 +94,6 @@ const buttons = document.querySelectorAll("button");
 buttons.forEach(function (button) {
     button.addEventListener("click", () => {
         keepScore( playRound(button.textContent, getComputerChoice()) );
-        keepScore(2);
+        setTimeout(() => keepScore(2), 100);
     });
 });
