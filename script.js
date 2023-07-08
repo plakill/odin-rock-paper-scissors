@@ -55,6 +55,8 @@ const keepScore = (result) => {
     const computerScore = document.querySelector("div.score > p.computer");
     let loses = parseInt(computerScore.textContent);
 
+    const resultDiv = document.querySelector("div.result");
+
     let playAgain = document.createElement("button");
     playAgain.textContent = "Play again!";
     playAgain.addEventListener("click", () => {
@@ -62,14 +64,15 @@ const keepScore = (result) => {
         computerScore.textContent = 0;
         winner.removeChild(playAgain);
         winner.textContent = "";
+        resultDiv.textContent = "Start the game by choosing your weapon!"
     });
     
     let winner = document.querySelector("div.winner");
     if (wins == 5) {
-        winner.textContent = "You win the game!";
+        winner.textContent = "You won the game!";
         winner.appendChild(playAgain);
     } else if (loses == 5) {
-        winner.textContent = "You lose the game!";
+        winner.textContent = "You lost the game!";
         winner.appendChild(playAgain);
     } else {
         switch (result) {
@@ -80,7 +83,9 @@ const keepScore = (result) => {
             case -1:
                 loses++;
                 computerScore.textContent = loses;
-                break;                
+                break;
+            default:
+                break;
         }
     }
 };
@@ -89,5 +94,6 @@ const buttons = document.querySelectorAll("button");
 buttons.forEach(function (button) {
     button.addEventListener("click", () => {
         keepScore( playRound(button.textContent, getComputerChoice()) );
+        keepScore(2);
     });
 });
