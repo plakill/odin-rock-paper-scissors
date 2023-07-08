@@ -14,69 +14,35 @@ const playRound = (playerChoice, computerChoice) => {
     switch (playerSelection) {
         case "rock":
             if (computerChoice == "Rock") {
-                return 0;
+                console.log("It's a tie!");
             } else if (computerChoice == "Paper") {
-                return -1;
+                console.log("You lose! Paper beats rock!");
             } else {
-                return 1;
+                console.log("You win! Rock beats scissors!");
             }
+            break;
         case "paper":
             if (computerChoice == "Paper") {
-                return 0;
+                console.log("It's a tie!");
             } else if (computerChoice == "Scissors") {
-                return -1;
+                console.log("You lose! Scissors beat paper!");
             } else {
-                return 1;
+                console.log("You win! Paper beats rock!");
             }
+            break;
         case "scissors":
             if (computerChoice == "Scissors") {
-                return 0;
-            } else if (computerChoice == "Rock") {
-                return -1;
-            } else {
-                return 1;
-            }
-        default:
-            return -2;
-    }
-}
-
-
-const game = () => {
-    let wins = 0;
-    let loses = 0;
-    let draws = 0;
-    for (let i = 0; i < 5; i++) {
-        const playerChoice = prompt("Your choice: ");
-        const computerChoice = getComputerChoice();
-        switch (playRound(playerChoice, computerChoice)) {
-            case 1:
-                console.log("You win!");
-                wins++;
-                console.log(`Score: You ${wins} - ${loses} Computer`);
-                break;
-            case -1:
-                console.log("You lose!");
-                loses++;
-                console.log(`Score: You ${wins} - ${loses} Computer`);
-                break;
-            case 0:
                 console.log("It's a tie!");
-                draws++;
-                console.log(`Score: You ${wins} - ${loses} Computer`);
-                break;
-            default:
-                i--;
-                continue;
-        }
+            } else if (computerChoice == "Rock") {
+                console.log("You lose! Rock beats scissors!");
+            } else {
+                console.log("You win! Scissors beat paper!");
+            }
+            break;
     }
-
-    if (wins == loses) {
-        console.log("It's a draw, play again!");
-        game();
-    }
-    
-    console.log(`Score: You ${wins} - ${loses} Computer`);
 }
 
-game();
+let buttons = document.querySelectorAll("button");
+buttons.forEach(function (button) {
+    button.addEventListener("click", () => playRound(button.textContent, getComputerChoice()));
+});
