@@ -60,8 +60,8 @@ const keepScore = (result) => {
     playAgain.addEventListener("click", () => {
         playerScore.textContent = 0;
         computerScore.textContent = 0;
-        winner.textContent = "";
         winner.removeChild(playAgain);
+        winner.textContent = "";
     });
     
     let winner = document.querySelector("div.winner");
