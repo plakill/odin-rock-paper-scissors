@@ -7,43 +7,87 @@ const getComputerChoice = () => {
         case 2:
             return "Scissors";
     }
-}
+};
 
 const playRound = (playerChoice, computerChoice) => {
     const playerSelection = playerChoice.toLowerCase();
-    let result = document.querySelector("div.result");
+    const result = document.querySelector("div.result");
     switch (playerSelection) {
         case "rock":
             if (computerChoice == "Rock") {
                 result.textContent = "It's a tie!"; 
+                return 0;
             } else if (computerChoice == "Paper") {
                 result.textContent = "You lose! Paper beats rock!";
+                return -1;
             } else {
                 result.textContent = "You win! Rock beats scissors!";
+                return 1;
             }
-            break;
         case "paper":
             if (computerChoice == "Paper") {
                 result.textContent = "It's a tie!"; 
+                return 0;
             } else if (computerChoice == "Scissors") {
                 result.textContent = "You lose! Scissors beat paper!";
+                return -1;
             } else {
                 result.textContent = "You win! Paper beats rock";
+                return 1;
             }
-            break;
         case "scissors":
             if (computerChoice == "Scissors") {
                 result.textContent = "It's a tie!"; 
+                return 0;
             } else if (computerChoice == "Rock") {
                 result.textContent = "You lose! Rock beats scissors!";
+                return -1;
             } else {
                 result.textContent = "You win! Scissors beat paper!";
+                return 1;
             }
-            break;
     }
-}
+};
 
-let buttons = document.querySelectorAll("button");
+const keepScore = (result) => {
+    const playerScore = document.querySelector("div.score > p.player");
+    let wins = parseInt(playerScore.textContent);
+    const computerScore = document.querySelector("div.score > p.computer");
+    let loses = parseInt(computerScore.textContent);
+
+    let playAgain = document.createElement("button");
+    playAgain.textContent = "Play again!";
+    playAgain.addEventListener("click", () => {
+        playerScore.textContent = 0;
+        computerScore.textContent = 0;
+        winner.textContent = "";
+        winner.removeChild(playAgain);
+    });
+    
+    let winner = document.querySelector("div.winner");
+    if (wins == 5) {
+        winner.textContent = "You win the game!";
+        winner.appendChild(playAgain);
+    } else if (loses == 5) {
+        winner.textContent = "You lose the game!";
+        winner.appendChild(playAgain);
+    } else {
+        switch (result) {
+            case 1:
+                wins++;
+                playerScore.textContent = wins;
+                break;
+            case -1:
+                loses++;
+                computerScore.textContent = loses;
+                break;                
+        }
+    }
+};
+
+const buttons = document.querySelectorAll("button");
 buttons.forEach(function (button) {
-    button.addEventListener("click", () => playRound(button.textContent, getComputerChoice()));
+    button.addEventListener("click", () => {
+        keepScore( playRound(button.textContent, getComputerChoice()) );
+    });
 });
